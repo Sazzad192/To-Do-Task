@@ -10,8 +10,6 @@ export default function TaskPage() {
   const router = useRouter();
   const taskList = getTaskList();
 
-  console.log(taskList)
-
   return (
     <div className="mx-auto p-4 w-full sm:px-6 lg:px-10 max-w-7xl min-h-screen">
       <section className="flex justify-between items-center">
