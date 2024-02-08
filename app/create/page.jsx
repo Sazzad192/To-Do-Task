@@ -1,10 +1,10 @@
-"use client"
+"use client";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { object, string } from "yup";
 
-import { addTaskToList } from "@/common/helpers/UtilKit";
+import { getRandomUid } from "@/common/helpers/UtilKit";
 
 import Button from "@/components/Button";
 import PageTitle from "@/components/PageTitle";
@@ -37,6 +37,23 @@ const yupSchema = object({
   priority: string().required("Task priority is required!"),
 });
 
+export function addTaskToList(newTask) {
+  return new Promise((resolve, reject) => {
+    try {
+      const existingTaskList =
+        JSON.parse(localStorage.getItem("taskList")) || [];
+
+      existingTaskList.push(newTask);
+
+      localStorage.setItem("taskList", JSON.stringify(existingTaskList));
+
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
 export default function TaskCreate() {
   const router = useRouter();
 
@@ -48,14 +65,19 @@ export default function TaskCreate() {
       setSubmitting(true);
 
       const handleSuccess = () => {
-        router.push("/")
+        router.push("/tasks");
       };
 
       const handleFailure = (error) => {
         console.error(error);
       };
 
-      const promise = addTaskToList(values)
+      const payload = {
+        uid: getRandomUid(),
+        ...values,
+      };
+
+      const promise = addTaskToList(payload)
         .then(handleSuccess)
         .catch(handleFailure);
 
@@ -100,27 +122,27 @@ export default function TaskCreate() {
 
           <div className="flex md:flex-row flex-col gap-2 items-center">
             <div className="w-full">
-            <SelectField
-              label="Select Status"
-              options={taskStatus}
-              name="status"
-              value={values.status}
-              onChange={handleChange}
-              labelClassName="text-gray-700 text-base font-bold"
-            />
-            <FormikErrorBox formik={formik} field="status" />
+              <SelectField
+                label="Select Status"
+                options={taskStatus}
+                name="status"
+                value={values.status}
+                onChange={handleChange}
+                labelClassName="text-gray-700 text-base font-bold"
+              />
+              <FormikErrorBox formik={formik} field="status" />
             </div>
 
             <div className="w-full">
-            <SelectField
-              label="Select Priority"
-              options={taskPriority}
-              name="priority"
-              value={values.priority}
-              onChange={handleChange}
-              labelClassName="text-gray-700 text-base font-bold"
-            />
-            <FormikErrorBox formik={formik} field="priority" />
+              <SelectField
+                label="Select Priority"
+                options={taskPriority}
+                name="priority"
+                value={values.priority}
+                onChange={handleChange}
+                labelClassName="text-gray-700 text-base font-bold"
+              />
+              <FormikErrorBox formik={formik} field="priority" />
             </div>
           </div>
           <Button type="submit" variant="outline">

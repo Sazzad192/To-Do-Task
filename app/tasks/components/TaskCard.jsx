@@ -1,22 +1,27 @@
+import Link from "next/link";
+
 export default function TaskCard({ data }) {
   return (
-    <div className="flex justify-between items-center border rounded-md shadow-md p-4">
+    <Link
+      href={`/tasks/${data.uid}`}
+      className="flex justify-between items-center border rounded-md shadow-md p-4 cursor-pointer bg-white"
+    >
       <p>
-        Name: <br />
+        Name <br />
         {data.name}
       </p>
       <p>
-        Description: <br />
+        Description <br />
         {data.description}
       </p>
       <p className="capitalize">
-        Status: <br />
+        Status <br />
         {data.status.toLowerCase()}
       </p>
       <p className="capitalize">
-        Priority: <br />
+        Priority <br />
         {data.priority.toLowerCase()}
       </p>
-    </div>
+    </Link>
   );
 }

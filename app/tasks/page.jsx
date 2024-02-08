@@ -8,6 +8,9 @@ import TaskCard from "./components/TaskCard";
 
 export default function TaskPage() {
   const router = useRouter();
+  const taskList = getTaskList();
+
+  console.log(taskList)
 
   return (
     <div className="mx-auto p-4 w-full sm:px-6 lg:px-10 max-w-7xl min-h-screen">
@@ -20,9 +23,11 @@ export default function TaskPage() {
       </section>
 
       <section className="space-y-3 pt-3">
-        {
-            getTaskList().map((item, i) => <TaskCard key={i} data={item}/>)
-        }
+        {taskList.length ? (
+          taskList.map((item, i) => <TaskCard key={i} data={item} />)
+        ) : (
+          <p className="text-center font-semibold"> No Task Added Yet</p>
+        )}
       </section>
     </div>
   );
