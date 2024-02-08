@@ -4,7 +4,7 @@ export default function TaskCard({ data }) {
   const priorityStyles = {
     HIGH: "bg-[#DCFCE7] text-teal-700",
     MEDIUM: "bg-[#FEF9C3] text-orange-700",
-    LOW: "bg-[#FED7D7] text-red-700",
+    lOW: "bg-[#FED7D7] text-red-700",
   };
 
   return (
@@ -12,14 +12,16 @@ export default function TaskCard({ data }) {
       href={`/tasks/${data.uid}`}
       className="flex flex-col md:flex-row justify-between gap-2 items-start md:items-center border rounded-md shadow-md p-4 cursor-pointer bg-white"
     >
-      <div className="flex flex-row md:flex-col gap-2 items-center md:items-start">
+      <div className="flex flex-row md:flex-col gap-2 items-center md:items-start max-w-[100px]">
         <p>Name</p>
         <p className="text-gray-700 font-semibold">{data.name}</p>
       </div>
+      <div className="max-w-[200px] whitespace-break-spaces">
       <p>
         Description <br />
         {data.description}
       </p>
+      </div>
       <div className="flex flex-row md:flex-col gap-2 items-center md:items-start">
         <p>Status</p>
         <p className="capitalize rounded-sm text-gray-700 font-semibold">
