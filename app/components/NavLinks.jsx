@@ -24,8 +24,9 @@ export default function NavLinks() {
         className="block h-7 w-7 cursor-pointer md:hidden"
         aria-hidden="true"
       />
-      {navLinks.map((item) => (
+      {navLinks.map((item, i) => (
         <Link
+          key={i}
           href={item.url}
           className={`hidden md:flex text-gray-600 hover:bg-gray-50 hover:text-gray-900 group items-center px-3 py-2 text-sm font-medium rounded-md ${
             isActiveRoute(item.url) &&
@@ -38,8 +39,9 @@ export default function NavLinks() {
 
       <RightSideDrawer title="ToDo" open={drawerOpen} setOpen={setDrawerOpen}>
         <div className="">
-          {navLinks.map((item) => (
+          {navLinks.map((item, i) => (
             <Link
+            key={i}
               href={item.url}
               className={`text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium rounded-md ${
                 isActiveRoute(item.url) &&
