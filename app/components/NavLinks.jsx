@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 const navLinks = [
   { label: "Home", url: "/" },
   { label: "Task List", url: "/tasks" },
-  { label: "Create Task", url: "/tasks/create" },
+  { label: "Create Task", url: "/create" },
 ];
 
 export default function NavLinks() {
@@ -41,7 +41,8 @@ export default function NavLinks() {
         <div className="">
           {navLinks.map((item, i) => (
             <Link
-            key={i}
+              key={i}
+              onClick={() => setDrawerOpen(false)}
               href={item.url}
               className={`text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium rounded-md ${
                 isActiveRoute(item.url) &&
