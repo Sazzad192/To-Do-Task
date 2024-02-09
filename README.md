@@ -2,6 +2,7 @@
 ## Getting Started
 Hello,
 ````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+I used Next.JS here.
 Here at first I setup my tailwind config as my color palate. Then I create some components and create home page. Now it's easy to implement
 anything. I breakdown all component so that I call those again and again. 
 I create a UtilKit where I store all of my reuseable functions. 
